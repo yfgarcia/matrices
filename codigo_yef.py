@@ -1,7 +1,4 @@
 
-
- 
-
 """ M1 = [[0, 1, 0],
            [0,1,0], 
            [0,1,0]]
@@ -37,37 +34,60 @@ def matriz(n): #Genera una matriz automaticamente
             m[columna][fila] = m[fila][columna] = random.randint(0,1)
     return m
 
+def simetrica(mat,cont,n):
+
+   for fila in range (n):
+            for columna in range(n):
+                normal=mat[fila][columna]
+                traspuesta=mat[columna][fila]
+                if normal==traspuesta:
+                    cont+=1
+        
+   if cont==(n*n):
+        t=1
+        print("su matriz es simetrica")
+   else:
+        t=0
+        print("su matriz no es simetrica")
+   return t
 
 print("Seleccione como generar la matriz")
 print("1. Manual")
 print("2. Automatica")
 
 opc=int(input())
+contador=0
 
 if opc==1:
+    
     print("ingrese el orden de la matriz a calcular")
     n = int(input())
-                
+    
     matrizA=[]
     for i in range(n):
         matrizA.append([0]*n)
 
     #Rellenando la matriz
     for fila in range(n):
-        for columna in range(fila,n):
+        for columna in range(n):
             matrizA[fila][columna]=int(
                 input(f"ingrese la posicion del numero {fila},{columna}:"))
     #imprimir matriz
-        print("su matriz es la siguiente") 
-        for i in matrizA:
-            print(i,end="")
-            print()           
+    print("su matriz es la siguiente") 
+    for i in matrizA:
+        print(i,end="")
+        print()
+ 
+
+    simetrica(matrizA,contador,n)
+    resultado = matriz(n)
+    matrizA = np.matrix(resultado)       
 
 elif opc==2: 
     
     print("ingrese el orden de la matriz a calcular")
     n = int(input())   
-        
+      
     resultado = matriz(n)
     
     matrizA = np.matrix(resultado)
@@ -75,7 +95,6 @@ elif opc==2:
 else:
     
     print("Seleccione una opcion correcta")
-
 
 #Calculando relaciones
 Mtransitiva = transitiva(matrizA)
