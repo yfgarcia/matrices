@@ -1,14 +1,4 @@
 
-""" M1 = [[0, 1, 0],
-           [0,1,0], 
-           [0,1,0]]
-
-matrix_length = len(M1)
-
-#To print the rows in the Matrix
-for i in range(matrix_length):
-    print(M1[i])
- """
 import random
 import pprint
 import numpy as np
@@ -35,21 +25,20 @@ def matriz(n): #Genera una matriz automaticamente
     return m
 
 def simetrica(mat,cont,n): #calcula la matriz simetrica 
-
    for fila in range (n):
             for columna in range(n):
                 normal=mat[fila][columna]
                 traspuesta=mat[columna][fila]
                 if normal==traspuesta:
-                    cont+=1
-        
+                    cont+=1     
    if cont==(n*n):
         t=1
-        print("su matriz es simetrica")
+        #print("su matriz es simetrica")
    else:
         t=0
-        print("su matriz no es antisimetrica")
+        #print("su matriz no es antisimetrica")
    return t
+
 
 print("Seleccione como generar la matriz")
 print("1. Manual")
@@ -72,16 +61,18 @@ if opc==1:
         for columna in range(n):
             matrizA[fila][columna]=int(
                 input(f"ingrese la posicion del numero {fila},{columna}:"))
-    #imprimir matriz
-    print("su matriz es la siguiente") 
-    for i in matrizA:
-        print(i,end="")
-        print()
+                
+    # #imprimir matriz
+    # print("su matriz es la siguiente") 
+    # for i in matrizA:
+    #     print(i,end="")
+    #     print()
  
 
-    simetrica(matrizA,contador,n) #llamado de la matriz simetrica 
-    resultado = matriz(n)  
-    matrizA = np.matrix(resultado)       
+    ##simetrica(matrizA,contador,n) #llamado de la matriz simetrica 
+    ##resultado = matriz(n)  
+    resultado = matrizA
+    matrizA = np.matrix(matrizA)      
 
 elif opc==2: 
     
@@ -91,7 +82,7 @@ elif opc==2:
     resultado = matriz(n)
     
     matrizA = np.matrix(resultado)
-
+    
 else:
     
     print("Seleccione una opcion correcta")
@@ -99,6 +90,7 @@ else:
 #Calculando relaciones
 Mtransitiva = transitiva(matrizA)
 diagonal = diagonalIzquierda(resultado)
+Msimetrica = simetrica(resultado,contador,n) #llamado de la matriz simetrica 
 
 if sum(diagonal) == n:
     reflexiva = 1
@@ -109,11 +101,22 @@ if sum(diagonal) == 0:
     irreflexiva = 1
 else:
     irreflexiva = 0
+    
+if Msimetrica == 1:
+    Mantisimetrica = 0
+else:
+    Mantisimetrica = 1
+    
+    
+print("")
+print("Su matriz es la siguiente")
+print(matrizA)
 
-print(matrizA) #Visualizando la matriz generada
 
 print("Resultado analisis Reflexiva: ",
       reflexiva, ", Irreflexiva: ", irreflexiva,
-      ", Transitiva: ", Mtransitiva)
+      ", Transitiva: ", Mtransitiva, " , Simetrica: ", Msimetrica, " , Antisimetrica: ", Mantisimetrica)
+
+
 
 
