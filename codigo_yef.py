@@ -14,10 +14,34 @@ for i in range(matrix_length):
  """
 import random
 import pprint
+import numpy as np
+
+   ## Creacion de funciones para calcular las matrices
+diagonalIzquierda = lambda m: [m[i][i] for i in range(len(m))] #Diagonal de la matriz
+
+def transitiva(mat): #Calcular si la matriz es transitiva
+    #formula Mr = Mr + (Mr*Mr)
+    mat = np.matrix(mat)
+    resT = mat + (mat*mat)
+    resultadoMatriz = (resT == mat).all()
+    if resultadoMatriz:
+        t = 1
+    else:
+        t = 0
+    return t
+
+def matriz(n): #Genera una matriz automaticamente
+    m = [[0] * n for _ in range(n)]
+    for fila in range(n):
+        for columna in range(fila, n):
+            m[columna][fila] = m[fila][columna] = random.randint(0,1)
+    return m
+
 
 print("Seleccione como generar la matriz")
 print("1. Manual")
 print("2. Automatica")
+
 opc=int(input())
 
 if opc==1:
@@ -39,38 +63,38 @@ if opc==1:
             print(i,end="")
             print()           
 
+elif opc==2: 
     
+    print("ingrese el orden de la matriz a calcular")
+    n = int(input())   
+        
+    resultado = matriz(n)
+    
+    matrizA = np.matrix(resultado)
 
-elif opc==2:   
-
-    def matriz(n):
-        m = [[0] * n for _ in range(n)]
-        for fila in range(n):
-            for columna in range(fila, n):
-                m[columna][fila] = m[fila][columna] = random.randint(0,1)
-                
-        return m
-
-    resultado = matriz(4)
-
-    diagonalIzquierda = lambda m: [m[i][i] for i in range(len(m))]
-
-    relacion = diagonalIzquierda(resultado)
-
-    print("diagonal", relacion)
-    print("")
-    pprint.pprint(resultado)
-    print("")
-
-
-    if sum(relacion) == 4:
-        print("Es Reflexiva")
-    elif sum(relacion) == 0:
-        print("Es irreflexiva")
-    else:
-        print("No es ninguna")
 else:
-     print("Seleccione una opcion correcta")
+    
+    print("Seleccione una opcion correcta")
 
+
+#Calculando relaciones
+Mtransitiva = transitiva(matrizA)
+diagonal = diagonalIzquierda(resultado)
+
+if sum(diagonal) == n:
+    reflexiva = 1
+else:
+    reflexiva = 0
+    
+if sum(diagonal) == 0:
+    irreflexiva = 1
+else:
+    irreflexiva = 0
+
+print(matrizA) #Visualizando la matriz generada
+
+print("Resultado analisis Reflexiva: ",
+      reflexiva, ", Irreflexiva: ", irreflexiva,
+      ", Transitiva: ", Mtransitiva)
 
 
