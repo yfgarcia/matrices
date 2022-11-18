@@ -34,7 +34,7 @@ def matriz(n): #Genera una matriz automaticamente
             m[columna][fila] = m[fila][columna] = random.randint(0,1)
     return m
 
-def simetrica(mat,cont,n):
+def simetrica(mat,cont,n): #calcula la matriz simetrica 
 
    for fila in range (n):
             for columna in range(n):
@@ -48,7 +48,7 @@ def simetrica(mat,cont,n):
         print("su matriz es simetrica")
    else:
         t=0
-        print("su matriz no es simetrica")
+        print("su matriz no es antisimetrica")
    return t
 
 print("Seleccione como generar la matriz")
@@ -79,8 +79,8 @@ if opc==1:
         print()
  
 
-    simetrica(matrizA,contador,n)
-    resultado = matriz(n)
+    simetrica(matrizA,contador,n) #llamado de la matriz simetrica 
+    resultado = matriz(n)  
     matrizA = np.matrix(resultado)       
 
 elif opc==2: 
